@@ -6,7 +6,7 @@
 /*   By: bchagas- <bchagas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 05:12:05 by bchagas-          #+#    #+#             */
-/*   Updated: 2025/12/16 04:49:02 by bchagas-         ###   ########.fr       */
+/*   Updated: 2025/12/18 00:17:42 by bchagas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void ft_swap(t_stack *stack)
 	t_node	*second;
 		
 	if (!stack || stack->size < 2)
-		return;
+		return ;
 	first = stack->head;
 	second = first->next;
 	first->next = second->next;
@@ -31,26 +31,55 @@ void ft_swap(t_stack *stack)
 	if (stack->size == 2)
 		stack->tail = first;
 }
-void ft_push(t_stack *stack_a, t_stack *stack_b)
+
+void ft_push(t_stack *stack_from, t_stack *stack_to)
 {
 	t_node	*node;
 	
-	if (!stack_a || stack_a -> size == 0)
+	if (!stack_from || stack_from -> size == 0)
 		return ;
-	node = stack_a->head;
+	node = stack_from->head;
 	
-	stack_a->head = node->next;
-	if (stack_a->head)
-		stack_a->head->prev = NULL;
+	stack_from->head = node->next;
+	if (stack_from->head)
+		stack_from->head->prev = NULL;
 	else
-		stack_a->tail = NULL;
-	stack_a->size--;
-	node->next = stack_b->head;
+		stack_from->tail = NULL;
+	stack_from->size--;
+	node->next = stack_to->head;
 	node->prev = NULL;
-	if (stack_b->head)
-		stack_b->head->prev = node;
+	if (stack_to->head)
+		stack_to->head->prev = node;
 	else
-		stack_b->tail = node;
-	stack_b->head = node;
-	stack_b->size++;			
+		stack_to->tail = node;
+	stack_to->head = node;
+	stack_to->size++;			
+}
+
+void	ft_rotate(t_stack *stack)
+{
+	t_node	*node;
+
+	if (!stack || stack->size < 2)
+		return ;
+	node = stack->head;
+	stack->head = node->next;
+	stack->head->prev = NULL;
+	node->next = NULL;
+	node->prev = stack->tail;
+	stack->tail->next = node;
+	stack->tail = node;
+}
+
+void	ft_reverse_rotate(t_stack *stack)
+{
+	t_node	*node;
+
+	if (!stack || stack->size < 2)
+		return ;
+	node = stack->tail;
+	stack->tail = node->prev;
+	stack->tail->next = NULL;
+	node->prev = NULL;
+	node->next = stack->head;
 }
