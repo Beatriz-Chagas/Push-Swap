@@ -6,7 +6,7 @@
 /*   By: bchagas- <bchagas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 05:12:05 by bchagas-          #+#    #+#             */
-/*   Updated: 2025/12/18 00:17:42 by bchagas-         ###   ########.fr       */
+/*   Updated: 2025/12/22 03:25:41 by bchagas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,28 +32,28 @@ void ft_swap(t_stack *stack)
 		stack->tail = first;
 }
 
-void ft_push(t_stack *stack_from, t_stack *stack_to)
+void ft_push(t_stack *from, t_stack *to)
 {
 	t_node	*node;
 	
-	if (!stack_from || stack_from -> size == 0)
+	if (!from || from -> size == 0)
 		return ;
-	node = stack_from->head;
+	node = from->head;
 	
-	stack_from->head = node->next;
-	if (stack_from->head)
-		stack_from->head->prev = NULL;
+	from->head = node->next;
+	if (from->head)
+		from->head->prev = NULL;
 	else
-		stack_from->tail = NULL;
-	stack_from->size--;
-	node->next = stack_to->head;
+		from->tail = NULL;
+	from->size--;
+	node->next = to->head;
 	node->prev = NULL;
-	if (stack_to->head)
-		stack_to->head->prev = node;
+	if (to->head)
+		to->head->prev = node;
 	else
-		stack_to->tail = node;
-	stack_to->head = node;
-	stack_to->size++;			
+		to->tail = node;
+	to->head = node;
+	to->size++;			
 }
 
 void	ft_rotate(t_stack *stack)
