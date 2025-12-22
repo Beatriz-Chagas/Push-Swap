@@ -6,7 +6,7 @@
 /*   By: bchagas- <bchagas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 02:32:02 by bchagas-          #+#    #+#             */
-/*   Updated: 2025/12/18 05:30:11 by bchagas-         ###   ########.fr       */
+/*   Updated: 2025/12/22 00:04:49 by bchagas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,23 @@ void    ft_sort_three(t_stack *a)
 		ft_ra(a);
 	else
 		return;
+}
+void	ft_sort_five(t_stack *a, t_stack *b)
+{
+	int	push;
+
+	if (a->size <= 3)
+	{
+		ft_sort_small(a);
+		return ;
+	}
+	push = a->size - 3;
+	while (push--)
+	{
+		ft_bring_min_top(a);
+		ft_pb(a, b);
+	}
+	ft_sort_three(a);
+	while (b->size > 0)
+		ft_pa(a, b);
 }
