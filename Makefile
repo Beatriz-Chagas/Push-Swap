@@ -1,49 +1,50 @@
-NAME = push_swap
+NAME		= push_swap
 
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -I.
 
 SRC_DIR		= src
 OBJ_DIR		= obj
+LIBFT_DIR	= libft
 
-SRC			= \
-	push_swap.c \
-	init/parse_args.c \
-	init/validate_args.c \
-	init/init_stack.c \
+SRCS		= \
+	main.c \
+	operations/operations.c \
 	operations/swap.c \
 	operations/push.c \
 	operations/rotate.c \
 	operations/reverse_rotate.c \
-	sort/index_stack.c \
 	sort/sort_small.c \
-	sort/sort_big.c \
-	utils/stack_utils.c \
-	utils/errors.c
+	stack_init.c \
+	stack_utils.c\
+	parsing/parse.c
 
-SRCS        = $(addprefix $(SRC_DIR)/, $(SRC))
-OBJS        = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+SRCS		:= $(addprefix $(SRC_DIR)/, $(SRCS))
+OBJS		:= $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
-# --------------------------------------------------------------------------- #
+LIBFT		= $(LIBFT_DIR)/libft.a
 
-all: $(NAME)
+
+all: $(LIBFT) $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	@mkdir -p $(OBJ_DIR)
-	@mkdir -p $(OBJ_DIR)/init
-	@mkdir -p $(OBJ_DIR)/operations
-	@mkdir -p $(OBJ_DIR)/sort
-	@mkdir -p $(OBJ_DIR)/utils
+	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
+
+$(LIBFT):
+	make -C $(LIBFT_DIR)
+
 
 clean:
 	rm -rf $(OBJ_DIR)
+	make -C $(LIBFT_DIR) clean
 
 fclean: clean
 	rm -f $(NAME)
+	make -C $(LIBFT_DIR) fclean
 
 re: fclean all
 
