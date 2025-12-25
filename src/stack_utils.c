@@ -6,29 +6,11 @@
 /*   By: bchagas- <bchagas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 05:35:12 by bchagas-          #+#    #+#             */
-/*   Updated: 2025/12/22 02:48:53 by bchagas-         ###   ########.fr       */
+/*   Updated: 2025/12/25 06:23:31 by bchagas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-t_node	*ft_find_min(t_stack *a)
-{
-	t_node	*current;
-	t_node	*min;
-
-	if (!a || !a->head)
-		return (NULL);
-	current = a->head;
-	min = current;
-	while(current)
-	{
-		if (current->value < min->value)
-			min = current;
-		current = current->next;
-	}
-	return (min);
-}
 
 int		ft_get_pos(t_stack *a, t_node *n)
 {
@@ -54,9 +36,15 @@ int	ft_find_insert_pos(t_stack *a, int value)
 {
 	t_node	*current;
 	int		pos;
+	int		min;
+	int		max;
 
+	min = ft_find_min(a)->value;
+	max = ft_find_max(a)->value;
 	current = a->head;
 	pos = 0;
+	if (value < min || value > max)
+		return (ft_get_pos(a, ft_find_min(a)));
 	while (current->next)
 	{
 		if (current->value < value && current->next->value > value)
@@ -67,21 +55,17 @@ int	ft_find_insert_pos(t_stack *a, int value)
 	return (ft_get_pos(a, ft_find_min(a)));
 }
 
-void ft_bring_min_top(t_stack *a)
+void	ft_bring_min_top(t_stack *a)
 {
-	t_node	*min;
-	int		pos;
-	
-	min = ft_find_min(a);
-	pos = ft_get_pos(a, min);
-	if(pos <= a->size / 2)
-	{
-		while (a->head != min)
+	int	pos;
+
+	if (!a || a->size < 2)
+		return ;
+	pos = ft_get_pos(a, ft_find_min(a));
+	if (pos <= a->size / 2)
+		while (pos--)
 			ft_ra(a);
-	}
 	else
-	{
-		while (a->head != min)
+		while (pos++ < a->size)
 			ft_rra(a);
-	}
 }
