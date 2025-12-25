@@ -15,9 +15,12 @@ SRCS		= \
 	operations/rotate.c \
 	operations/reverse_rotate.c \
 	sort/sort_small.c \
+	sort/sort.c \
 	stack_init.c \
 	stack_utils.c\
-	parsing/parse.c
+	parsing/parse.c\
+	median_utils.c\
+	execute_cost.c
 
 SRCS		:= $(addprefix $(SRC_DIR)/, $(SRCS))
 OBJS		:= $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
