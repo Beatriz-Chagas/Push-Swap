@@ -6,7 +6,7 @@
 /*   By: bchagas- <bchagas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 04:21:18 by bchagas-          #+#    #+#             */
-/*   Updated: 2025/12/25 06:44:23 by bchagas-         ###   ########.fr       */
+/*   Updated: 2025/12/27 04:50:14 by bchagas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "libft/libft.h"
 
 # define INT_MAX 2147483647
-# define INT_MIN (-2147483647 - 1)
+# define INT_MIN -2147483648
 
 typedef struct s_node
 {
@@ -54,9 +54,7 @@ void	ft_stack_free(t_stack *stack);
 
 /* sort */
 void	ft_sort(t_stack *a, t_stack *b);
-void	ft_sort_small(t_stack *a);
-void	ft_sort_three(t_stack *a);
-void	ft_sort_five(t_stack *a, t_stack *b);
+void	ft_sort_small(t_stack *a, t_stack *b);
 
 /* Turk */
 void	ft_push_all_b(t_stack *a, t_stack *b);
@@ -67,7 +65,6 @@ void	ft_execute_cost(t_stack *a, t_stack *b, t_cost c);
 /* helpers */
 t_node	*ft_find_min(t_stack *a);
 t_node	*ft_find_max(t_stack *a);
-t_node	*ft_find_value(t_stack *a, int value);
 int		ft_get_pos(t_stack *a, t_node *n);
 int		ft_find_insert_pos(t_stack *a, int value);
 void	ft_bring_min_top(t_stack *a);
