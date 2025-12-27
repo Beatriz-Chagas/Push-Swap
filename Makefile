@@ -17,9 +17,9 @@ SRCS		= \
 	sort/sort_small.c \
 	sort/sort.c \
 	stack_init.c \
-	stack_utils.c\
-	parsing/parse.c\
-	median_utils.c\
+	stack_utils.c \
+	parsing/parse.c \
+	median_utils.c \
 	execute_cost.c
 
 SRCS		:= $(addprefix $(SRC_DIR)/, $(SRCS))
@@ -27,27 +27,31 @@ OBJS		:= $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 LIBFT		= $(LIBFT_DIR)/libft.a
 
-
 all: $(LIBFT) $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+	@echo "🔗 Linking $(NAME)..."
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+	@echo "✅ $(NAME) compiled successfully"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c $< -o $@
+	@echo "🛠️ Compiling $<"
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(LIBFT):
-	make -C $(LIBFT_DIR)
-
+	@echo "📚 Compiling libft..."
+	@make -C $(LIBFT_DIR)
 
 clean:
-	rm -rf $(OBJ_DIR)
-	make -C $(LIBFT_DIR) clean
+	@echo "🧹 Removing object files"
+	@rm -rf $(OBJ_DIR)
+	@make -C $(LIBFT_DIR) clean
 
 fclean: clean
-	rm -f $(NAME)
-	make -C $(LIBFT_DIR) fclean
+	@echo "🗑️ Removing $(NAME)"
+	@rm -f $(NAME)
+	@make -C $(LIBFT_DIR) fclean
 
 re: fclean all
 
