@@ -6,7 +6,7 @@
 /*   By: bchagas- <bchagas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 01:39:24 by bchagas-          #+#    #+#             */
-/*   Updated: 2025/12/25 06:04:16 by bchagas-         ###   ########.fr       */
+/*   Updated: 2025/12/27 04:48:47 by bchagas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,6 @@ int	ft_is_sorted(t_stack *a)
 	}
 	return (1);
 }
-// void	print_stack(t_stack *a, char *name)
-// {
-// 	t_node	*tmp;
-
-// 	tmp = a->head;
-// 	ft_printf("%s: ", name);
-// 	while (tmp)
-// 	{
-// 		ft_printf("%d ", tmp->value);
-// 		tmp = tmp->next;
-// 	}
-// 	ft_printf("\n");
-// }
 
 int	main(int argc, char **argv)
 {
@@ -54,10 +41,8 @@ int	main(int argc, char **argv)
 		return (ft_putendl_fd("Error", 2), 1);
 	if (!ft_is_sorted(a))
 	{
-		if (a->size <= 3)
-			ft_sort_small(a);
-		else if (a->size <= 5)
-			ft_sort_five(a, b);
+		if (a->size <= 5)
+			ft_sort_small(a, b);
 		else
 			ft_sort(a, b);
 	}
@@ -65,4 +50,3 @@ int	main(int argc, char **argv)
 	ft_stack_free(b);
 	return (0);
 }
-
