@@ -6,17 +6,17 @@
 /*   By: bchagas- <bchagas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 05:12:05 by bchagas-          #+#    #+#             */
-/*   Updated: 2025/12/22 03:25:41 by bchagas-         ###   ########.fr       */
+/*   Updated: 2025/12/27 04:40:54 by bchagas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void ft_swap(t_stack *stack)
+void	ft_swap(t_stack *stack)
 {
 	t_node	*first;
 	t_node	*second;
-		
+
 	if (!stack || stack->size < 2)
 		return ;
 	first = stack->head;
@@ -32,14 +32,13 @@ void ft_swap(t_stack *stack)
 		stack->tail = first;
 }
 
-void ft_push(t_stack *from, t_stack *to)
+void	ft_push(t_stack *from, t_stack *to)
 {
 	t_node	*node;
-	
+
 	if (!from || from -> size == 0)
 		return ;
 	node = from->head;
-	
 	from->head = node->next;
 	if (from->head)
 		from->head->prev = NULL;
@@ -53,7 +52,7 @@ void ft_push(t_stack *from, t_stack *to)
 	else
 		to->tail = node;
 	to->head = node;
-	to->size++;			
+	to->size++;
 }
 
 void	ft_rotate(t_stack *stack)
@@ -82,4 +81,7 @@ void	ft_reverse_rotate(t_stack *stack)
 	stack->tail->next = NULL;
 	node->prev = NULL;
 	node->next = stack->head;
+	if (stack->head)
+		stack->head->prev = node;
+	stack->head = node;
 }
