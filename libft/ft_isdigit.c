@@ -6,7 +6,7 @@
 /*   By: bchagas- <bchagas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 01:30:29 by bchagas-          #+#    #+#             */
-/*   Updated: 2025/12/22 04:34:13 by bchagas-         ###   ########.fr       */
+/*   Updated: 2025/12/27 04:34:48 by bchagas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	ft_isdigit(int c)
 {
 	return (c >= '0' && c <= '9');
 }
+
 int	ft_valid_number(char *s)
 {
 	int	i;
