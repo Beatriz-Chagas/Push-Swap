@@ -6,7 +6,7 @@
 /*   By: bchagas- <bchagas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 03:50:35 by bchagas-          #+#    #+#             */
-/*   Updated: 2025/12/22 05:01:36 by bchagas-         ###   ########.fr       */
+/*   Updated: 2025/12/27 04:36:43 by bchagas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	ft_atol_safe(char *str, long *out)
 	return (1);
 }
 
-int		ft_has_duplicate(t_stack *a, int value)
+int	ft_has_duplicate(t_stack *a, int value)
 {
 	t_node	*current;
 
@@ -79,7 +79,7 @@ int		ft_has_duplicate(t_stack *a, int value)
 	return (0);
 }
 
-int		ft_push_number(t_stack *a, char *s)
+int	ft_push_number(t_stack *a, char *s)
 {
 	long	value;
 
@@ -91,11 +91,11 @@ int		ft_push_number(t_stack *a, char *s)
 	return (1);
 }
 
-int		ft_parse(int argc, char **argv, t_stack *a)
+int	ft_parse(int argc, char **argv, t_stack *a)
 {
 	char	**numbers;
 	int		i;
-	
+
 	numbers = ft_join_args(argc, argv);
 	if (!numbers)
 		return (1);
