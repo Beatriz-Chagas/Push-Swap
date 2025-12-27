@@ -6,52 +6,35 @@
 /*   By: bchagas- <bchagas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/24 23:27:01 by bchagas-          #+#    #+#             */
-/*   Updated: 2025/12/25 06:18:47 by bchagas-         ###   ########.fr       */
+/*   Updated: 2025/12/27 04:44:23 by bchagas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-// void	ft_push_all_b(t_stack *a, t_stack *b)
-// {
-// 	int median;
-// 	int	rotations;
-
-// 	median = ft_get_median(a);
-// 	while (a->size > 3)
-// 	{
-// 		rotations = a->size;
-// 		while (rotations-- && a->size > 3)
-// 		{
-// 			if (a->head->value < median)
-// 				ft_pb(a, b);
-// 			else
-// 				ft_ra(a);
-// 		}
-// 		median = ft_get_median(a);
-// 	}
-// 	ft_sort_small(a);
-// }
 void	ft_push_all_b(t_stack *a, t_stack *b)
 {
-	int	pushed;
-	int	size;
 	int	median;
+	int	pushed;
+	int	target;
 
-	size = a->size;
-	median = ft_get_median(a);
-	pushed = 0;
-	while (size-- && pushed < a->size - 3)
+	while (a->size > 3)
 	{
-		if (a->head->value <= median)
+		median = ft_get_median(a);
+		pushed = 0;
+		target = a->size / 2;
+		while (pushed < target && a->size > 3)
 		{
-			ft_pb(a, b);
-			pushed++;
+			if (a->head->value < median)
+			{
+				ft_pb(a, b);
+				pushed++;
+			}
+			else
+				ft_ra(a);
 		}
-		else
-			ft_ra(a);
 	}
-	ft_sort_small(a);
+	ft_sort_small(a, b);
 }
 
 t_cost	ft_calculate_cost(t_stack *a, t_stack *b, t_node *node)
@@ -81,7 +64,7 @@ t_cost	ft_find_cheapest(t_stack *a, t_stack *b)
 	t_cost	best;
 	t_cost	current;
 	int		first;
-	
+
 	cur = b->head;
 	first = 1;
 	while (cur)
@@ -96,11 +79,12 @@ t_cost	ft_find_cheapest(t_stack *a, t_stack *b)
 	}
 	return (best);
 }
+
 void	ft_rotate_min_to_top(t_stack *a)
 {
 	t_node	*min;
 	int		pos;
-	
+
 	min = ft_find_min(a);
 	pos = ft_get_pos(a, min);
 	if (pos <= a->size / 2)
@@ -112,23 +96,17 @@ void	ft_rotate_min_to_top(t_stack *a)
 	{
 		pos = a->size - pos;
 		while (pos-- > 0)
-			ft_rra(a);		
+			ft_rra(a);
 	}
 }
-#include <stdio.h>
+
 void	ft_sort(t_stack *a, t_stack *b)
 {
 	t_cost	c;
-	
-	
-	if (a->size <= 3)
-	{
-		ft_sort_small(a);
-		return ;
-	}
+
 	if (a->size <= 5)
 	{
-		ft_sort_five(a, b);
+		ft_sort_small(a, b);
 		return ;
 	}
 	ft_push_all_b(a, b);
