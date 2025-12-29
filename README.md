@@ -1,4 +1,4 @@
-*This project has been created as part of the 42 curriculum by <bchagas->.*
+*This project has been created as part of the 42 curriculum by bchagas-.*
 
 # push_swap
 
@@ -24,20 +24,21 @@ To compile the program:
 
 ```bash
 make
+```
 This will generate the executable:
 
-bash
-Copiar código
+```bash
 ./push_swap
+```
 Usage
-bash
-Copiar código
+```bash
 ./push_swap <list_of_integers>
+```
 Example:
 
-bash
-Copiar código
+```bash
 ./push_swap 3 2 1
+```
 The program prints a list of instructions to standard output that, when executed, sort stack A.
 
 If no arguments are provided, the program exits silently.
@@ -78,7 +79,8 @@ Performance:
 
 Optimized to reduce unnecessary operations
 
-Resources
+
+### Resources
 Classic References
 42 Project Subject: push_swap
 
@@ -126,11 +128,8 @@ Carefully reviewed and tested
 Fully understood before being applied
 
 Example Test
-bash
-Copiar código
+```bash
 ARG=$(shuf -i 1-100 -n 100 | tr '\n' ' ')
 ./push_swap $ARG
 The output sequence correctly sorts stack A.
-
-Author
-<bchagas->
+```
