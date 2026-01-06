@@ -175,7 +175,7 @@ No global variables
 No memory leaks (validated with Valgrind)
 
 Strict error handling
-
+```mermaid
 flowchart TD
     A[Start] --> B[Parse arguments]
     B --> C{Error}
@@ -205,5 +205,5 @@ flowchart TD
 
     N -- Yes --> T[Rotate A until minimum is on top]
     T --> Z
-
+```
 The project emphasizes understanding, optimization, and robustness over brute force solutions.
