@@ -58,8 +58,6 @@ Example:
 ```
 Output:
 
-text
-
 sa
 rra
 Each instruction is printed on a new line and represents an operation applied to the stacks.
@@ -67,8 +65,6 @@ Each instruction is printed on a new line and represents an operation applied to
 If no arguments are provided, the program prints nothing.
 
 In case of invalid input (non-integer values, duplicates, overflow), the program prints:
-
-text
 
 Error
 to standard error.
@@ -86,8 +82,6 @@ The checker reads instructions from standard input, one per line.
 ./checker 3 2 1
 ```
 Then type the instructions manually, pressing Enter after each instruction:
-
-text
 
 sa
 rra
@@ -107,8 +101,6 @@ The checker will then output:
 ```
 **Error handling**
 If an invalid instruction is detected, the checker prints:
-
-text
 
 Error
 to standard error.
