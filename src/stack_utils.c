@@ -6,7 +6,7 @@
 /*   By: bchagas- <bchagas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 05:35:12 by bchagas-          #+#    #+#             */
-/*   Updated: 2025/12/27 04:48:10 by bchagas-         ###   ########.fr       */
+/*   Updated: 2026/01/06 03:51:35 by bchagas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,13 @@ void	ft_bring_min_top(t_stack *a)
 	if (pos <= a->size / 2)
 	{
 		while (pos-- > 0)
-			ft_ra(a);
+			ft_ra(a, 1);
 	}
 	else
 	{
 		rot = a->size - pos;
 		while (rot-- > 0)
-			ft_rra(a);
+			ft_rra(a, 1);
 	}
 }
 
@@ -84,8 +84,22 @@ void	ft_finalize_stack(t_stack *a)
 	pos = ft_get_pos(a, ft_find_min(a));
 	if (pos <= a->size / 2)
 		while (pos--)
-			ft_ra(a);
+			ft_ra(a, 1);
 	else
 		while (pos++ < a->size)
-			ft_rra(a);
+			ft_rra(a, 1);
+}
+
+int	ft_is_sorted(t_stack *a)
+{
+	t_node	*cur;
+
+	cur = a->head;
+	while (cur && cur->next)
+	{
+		if (cur->value > cur->next->value)
+			return (0);
+		cur = cur->next;
+	}
+	return (1);
 }

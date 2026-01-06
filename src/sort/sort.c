@@ -6,7 +6,7 @@
 /*   By: bchagas- <bchagas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/24 23:27:01 by bchagas-          #+#    #+#             */
-/*   Updated: 2025/12/27 04:44:23 by bchagas-         ###   ########.fr       */
+/*   Updated: 2026/01/06 03:52:06 by bchagas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ void	ft_push_all_b(t_stack *a, t_stack *b)
 		{
 			if (a->head->value < median)
 			{
-				ft_pb(a, b);
+				ft_pb(a, b, 1);
 				pushed++;
 			}
 			else
-				ft_ra(a);
+				ft_ra(a, 1);
 		}
 	}
 	ft_sort_small(a, b);
@@ -90,13 +90,13 @@ void	ft_rotate_min_to_top(t_stack *a)
 	if (pos <= a->size / 2)
 	{
 		while (pos-- > 0)
-			ft_ra(a);
+			ft_ra(a, 1);
 	}
 	else
 	{
 		pos = a->size - pos;
 		while (pos-- > 0)
-			ft_rra(a);
+			ft_rra(a, 1);
 	}
 }
 
