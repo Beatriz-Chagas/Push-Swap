@@ -176,35 +176,34 @@ No memory leaks (validated with Valgrind)
 
 Strict error handling
 
-```mermaid
 flowchart TD
     A[Start] --> B[Parse arguments]
-    B --> C{Error?}
-    C -- Yes --> D[Print "Error" and exit]
-    C -- No --> E{Stack size ≤ 3?}
+    B --> C{Error}
+    C -- Yes --> D[Print Error and exit]
+    C -- No --> E{Stack size <= 3}
 
     E -- Yes --> F[Sort directly]
     F --> Z[End]
 
-    E -- No --> G{Stack size ≤ 5?}
+    E -- No --> G{Stack size <= 5}
     G -- Yes --> H[Push minimum elements to B]
-    H --> I[Sort remaining 3 in A]
+    H --> I[Sort remaining three in A]
     I --> J[Reinsert from B to A]
-    J --> Z[End]
+    J --> Z
 
     G -- No --> K[Compute median]
-    K --> L[Push elements < median to B]
-    L --> M[Sort remaining 3 in A]
+    K --> L[Push elements smaller than median to B]
+    L --> M[Sort remaining three in A]
 
-    M --> N{Is B empty?}
-    N -- No --> O[Calculate insertion position in A]
+    M --> N{Is B empty}
+    N -- No --> O[Find insertion position in A]
     O --> P[Calculate rotation cost]
-    P --> Q[Choose cheapest element]
+    P --> Q[Select cheapest element]
     Q --> R[Apply rotations]
-    R --> S[pa]
+    R --> S[Push from B to A]
     S --> N
 
     N -- Yes --> T[Rotate A until minimum is on top]
-    T --> Z[End]
-```
+    T --> Z
+
 The project emphasizes understanding, optimization, and robustness over brute force solutions.
