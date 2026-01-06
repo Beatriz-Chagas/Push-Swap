@@ -1,18 +1,24 @@
 *This project has been created as part of the 42 curriculum by bchagas-.*
 
-# push_swap
+# Push_swap
 
 ## Description
 
-The **push_swap** project consists of sorting a stack of integers using a limited set of operations and the smallest possible number of moves possible.  
-The program must output a sequence of instructions that sorts stack **A** in ascending order, using an auxiliary stack **B**, while respecting strict operational constraints.
+**Push_swap** is a sorting algorithm project developed as part of the 42 School curriculum.  
+The goal is to sort a stack of integers using a limited set of operations and **produce the smallest possible number of instructions**.
 
-This project focuses on:
-- Algorithmic problem-solving
-- Optimization and efficiency
-- Data structure manipulation
-- Robust input validation
-- Memory-safe C programming
+The project focuses on:
+- Algorithmic thinking
+- Data structures (stacks)
+- Optimization
+- Memory management
+- Parsing and error handling
+
+The program receives a list of integers as arguments, representing stack **A**, and outputs a sequence of instructions that will sort the stack in ascending order using only the allowed operations.
+The sorting strategy is based on a cost-based heuristic commonly used in the 42 community, often referred to as the “Turk algorithm”.
+It combines insertion logic, rotation cost calculation, and greedy selection to minimize the total number of operations.
+
+An additional program, **checker**, is provided to validate whether a sequence of instructions correctly sorts the stack.
 
 ---
 
@@ -20,7 +26,7 @@ This project focuses on:
 
 ### Compilation
 
-To compile the program:
+To compile the main program:
 
 ```bash
 make
@@ -30,7 +36,18 @@ This will generate the executable:
 ```bash
 ./push_swap
 ```
-Usage
+To compile the checker program:
+
+```bash
+make bonus
+```
+This will generate:
+
+```bash
+./checker
+```
+### Usage
+**push_swap**
 ```bash
 ./push_swap <list_of_integers>
 ```
@@ -39,97 +56,163 @@ Example:
 ```bash
 ./push_swap 3 2 1
 ```
-The program prints a list of instructions to standard output that, when executed, sort stack A.
+Output:
 
-If no arguments are provided, the program exits silently.
+text
 
-Features
-Full input validation:
+sa
+rra
+Each instruction is printed on a new line and represents an operation applied to the stacks.
 
-Non-numeric arguments
+If no arguments are provided, the program prints nothing.
 
-Integer overflow / underflow
+In case of invalid input (non-integer values, duplicates, overflow), the program prints:
 
-Duplicate values
+text
 
-Optimized handling for small stack sizes
+Error
+to standard error.
 
-Scalable algorithm for larger inputs
+**checker**
+The checker program verifies whether a sequence of instructions correctly sorts stack A.
 
-Deterministic output based on input
-
-Clean memory management with no leaks
-
-Technical Choices
-Data Structure: Doubly linked lists for efficient rotations and stack operations
-
-Sorting Strategy:
-
-Specialized logic for very small stacks
-
-Partitioning strategy for larger stacks
-
-Error Handling:
-
-Immediate termination on invalid input
-
-Proper memory cleanup before exit
-
-Performance:
-
-Optimized to reduce unnecessary operations
-
-
-### Resources
-Classic References
-42 Project Subject: push_swap
-
-Sorting algorithms:
-
-Selection sort
-
-Insertion logic
-
-Median-based partitioning
-
-Data structures:
-
-Linked lists
-
-Linux manual pages:
-
-man malloc
-
-man free
-
-man write
-
-man exit
-
-Valgrind documentation
-
-Use of AI Tools
-AI tools were used as a support resource, not as a substitute for understanding or responsibility.
-
-AI was used to:
-
-Help design and expand test cases
-
-Assist in reasoning about algorithmic behavior
-
-Review code organization and readability
-
-Suggest possible refactoring strategies
-
-All AI-generated content was:
-
-Carefully reviewed and tested
-
-Fully understood before being applied
-
-Example Test
 ```bash
-ARG=$(shuf -i 1-100 -n 100 | tr '\n' ' ')
-./push_swap $ARG
-The output sequence correctly sorts stack A.
+./checker <list_of_integers>
 ```
+The checker reads instructions from standard input, one per line.
+
+**Using the keyboard (interactive mode)**
+```bash
+./checker 3 2 1
+```
+Then type the instructions manually, pressing Enter after each instruction:
+
+text
+
+sa
+rra
+To finish input, press:
+
+- Ctrl + D (Linux / macOS)
+
+The checker will then output:
+
+- `OK` if stack A is sorted and stack B is empty
+
+- `KO` otherwise
+
+**Using pipes**
+```bash
+./push_swap 3 2 1 | ./checker 3 2 1
+```
+**Error handling**
+If an invalid instruction is detected, the checker prints:
+
+text
+
+Error
+to standard error.
+
+Examples of errors:
+
+- Invalid instruction (`foo`)
+
+- Duplicate numbers
+
+- Integer overflow
+
+- Non-numeric arguments
+
+**Allowed Operations**
+- `sa`, `sb`, `ss`
+
+- `pa`, `pb`
+
+- `ra`, `rb`, `rr`
+
+- `rra`, `rrb`, `rrr`
+
+Each operation must be followed by a newline.
+
+## Resources
+**Algorithm & Computer Science**
+- Stack-based sorting algorithms
+
+- Selection sort, insertion logic
+
+- Cost-based rotation strategies
+
+**Documentation**
+- GNU C Library Documentation
+
+- Valgrind User Manual
+
+- Linux man pages (`read`, `write`, `malloc`,`free`)
+
+**AI Usage Disclosure**
+AI tools were used ethically and critically during this project for:
+
+- Explaining algorithmic concepts
+
+- Reviewing logic and edge cases
+
+- Generating test ideas
+
+- Improving documentation clarity
+
+**All AI-generated suggestions were:**
+
+- Fully reviewed
+
+- Tested
+
+- Understood
+
+- Adapted manually
+
+No code was blindly copied.
+Final implementations and design decisions were made by the author.
+
+### Notes
+This project was developed following:
+
+42 Norminette rules
+
+No global variables
+
+No memory leaks (validated with Valgrind)
+
+Strict error handling
+
+```mermaid
+flowchart TD
+    A[Start] --> B[Parse arguments]
+    B --> C{Error?}
+    C -- Yes --> D[Print "Error" and exit]
+    C -- No --> E{Stack size ≤ 3?}
+
+    E -- Yes --> F[Sort directly]
+    F --> Z[End]
+
+    E -- No --> G{Stack size ≤ 5?}
+    G -- Yes --> H[Push minimum elements to B]
+    H --> I[Sort remaining 3 in A]
+    I --> J[Reinsert from B to A]
+    J --> Z[End]
+
+    G -- No --> K[Compute median]
+    K --> L[Push elements < median to B]
+    L --> M[Sort remaining 3 in A]
+
+    M --> N{Is B empty?}
+    N -- No --> O[Calculate insertion position in A]
+    O --> P[Calculate rotation cost]
+    P --> Q[Choose cheapest element]
+    Q --> R[Apply rotations]
+    R --> S[pa]
+    S --> N
+
+    N -- Yes --> T[Rotate A until minimum is on top]
+    T --> Z[End]
+```
+The project emphasizes understanding, optimization, and robustness over brute force solutions.
