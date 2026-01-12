@@ -77,19 +77,6 @@ void	ft_bring_min_top(t_stack *a)
 	}
 }
 
-void	ft_finalize_stack(t_stack *a)
-{
-	int	pos;
-
-	pos = ft_get_pos(a, ft_find_min(a));
-	if (pos <= a->size / 2)
-		while (pos--)
-			ft_ra(a, 1);
-	else
-		while (pos++ < a->size)
-			ft_rra(a, 1);
-}
-
 int	ft_is_sorted(t_stack *a)
 {
 	t_node	*cur;
