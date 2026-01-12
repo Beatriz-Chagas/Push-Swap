@@ -91,6 +91,4 @@ void	ft_rr(t_stack *a, t_stack *b, int print);
 void	ft_rra(t_stack *a, int print);
 void	ft_rrb(t_stack *b, int print);
 void	ft_rrr(t_stack *a, t_stack *b, int print);
-/* bonus */
-int		ft_exec_instruction(char *line, t_stack *a, t_stack *b);
 #endif

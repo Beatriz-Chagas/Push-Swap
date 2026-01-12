@@ -12,6 +12,35 @@
 
 #include "push_swap.h"
 
+int	ft_exec_instruction(char *line, t_stack *a, t_stack *b)
+{
+	if (!ft_strncmp(line, "sa\n", 3))
+		ft_sa(a, 0);
+	else if (!ft_strncmp(line, "sb\n", 3))
+		ft_sb(b, 0);
+	else if (!ft_strncmp(line, "ss\n", 3))
+		ft_ss(a, b, 0);
+	else if (!ft_strncmp(line, "pa\n", 3))
+		ft_pa(a, b, 0);
+	else if (!ft_strncmp(line, "pb\n", 3))
+		ft_pb(a, b, 0);
+	else if (!ft_strncmp(line, "ra\n", 3))
+		ft_ra(a, 0);
+	else if (!ft_strncmp(line, "rb\n", 3))
+		ft_rb(b, 0);
+	else if (!ft_strncmp(line, "rr\n", 3))
+		ft_rr(a, b, 0);
+	else if (!ft_strncmp(line, "rra\n", 4))
+		ft_rra(a, 0);
+	else if (!ft_strncmp(line, "rrb\n", 4))
+		ft_rrb(b, 0);
+	else if (!ft_strncmp(line, "rrr\n", 4))
+		ft_rrr(a, b, 0);
+	else
+		return (0);
+	return (1);
+}
+
 static void	ft_read_and_exec(t_stack *a, t_stack *b)
 {
 	char	*line;

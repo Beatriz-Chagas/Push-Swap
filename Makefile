@@ -26,7 +26,6 @@ PUSH_SWAP_SRCS = \
 
 CHECKER_SRCS = \
 	bonus/checker.c \
-	bonus/utils_bonus.c
 
 COMMON_SRCS := $(addprefix $(SRC_DIR)/, $(COMMON_SRCS))
 PUSH_SWAP_SRCS := $(addprefix $(SRC_DIR)/, $(PUSH_SWAP_SRCS))
