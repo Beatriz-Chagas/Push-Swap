@@ -97,8 +97,11 @@ int	ft_parse(int argc, char **argv, t_stack *a)
 	int		i;
 
 	numbers = ft_join_args(argc, argv);
-	if (!numbers)
+	if (!numbers[0])
+	{
+		ft_free_split(numbers);
 		return (1);
+	}
 	i = 0;
 	while (numbers[i])
 	{

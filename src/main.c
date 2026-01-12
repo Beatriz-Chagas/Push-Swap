@@ -24,14 +24,14 @@ int	main(int argc, char **argv)
 	if (!a || !b)
 		return (1);
 	if (ft_parse(argc, argv, a))
-		return (ft_putendl_fd("Error", 2), 1);
-	if (!ft_is_sorted(a))
 	{
-		if (a->size <= 5)
-			ft_sort_small(a, b);
-		else
-			ft_sort(a, b);
+		ft_stack_free(a);
+		ft_stack_free(b);
+		ft_putendl_fd("Error", 2);
+		return (1);
 	}
+	if (!ft_is_sorted(a))
+		ft_sort(a, b);
 	ft_stack_free(a);
 	ft_stack_free(b);
 	return (0);

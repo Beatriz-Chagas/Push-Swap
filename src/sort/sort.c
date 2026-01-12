@@ -80,26 +80,6 @@ t_cost	ft_find_cheapest(t_stack *a, t_stack *b)
 	return (best);
 }
 
-void	ft_rotate_min_to_top(t_stack *a)
-{
-	t_node	*min;
-	int		pos;
-
-	min = ft_find_min(a);
-	pos = ft_get_pos(a, min);
-	if (pos <= a->size / 2)
-	{
-		while (pos-- > 0)
-			ft_ra(a, 1);
-	}
-	else
-	{
-		pos = a->size - pos;
-		while (pos-- > 0)
-			ft_rra(a, 1);
-	}
-}
-
 void	ft_sort(t_stack *a, t_stack *b)
 {
 	t_cost	c;
@@ -115,5 +95,5 @@ void	ft_sort(t_stack *a, t_stack *b)
 		c = ft_find_cheapest(a, b);
 		ft_execute_cost(a, b, c);
 	}
-	ft_rotate_min_to_top(a);
+	ft_bring_min_top(a);
 }
