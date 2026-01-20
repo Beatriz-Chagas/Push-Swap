@@ -2,7 +2,7 @@ NAME		= push_swap
 CHECKER     = checker
 
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -I. -g3
+CFLAGS		= -Wall -Wextra -Werror -I.
 
 SRC_DIR		= src
 OBJ_DIR		= obj

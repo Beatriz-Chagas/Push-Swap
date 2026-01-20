@@ -78,6 +78,8 @@ int	main(int argc, char **argv)
 		return (1);
 	if (ft_parse(argc, argv, a))
 	{
+		ft_stack_free(a);
+		ft_stack_free(b);
 		ft_putendl_fd("Error", 2);
 		return (1);
 	}
